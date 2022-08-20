@@ -4,12 +4,7 @@ import { FeedbackButton } from './FeedbackOptions.styled';
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   const arrBtns = Object.keys(options);
   return (
-    <Box 
-    display="flex"
-    justifyContent="space-evenly"
-    
-    
-    >
+    <Box display="flex" justifyContent="space-evenly">
       {arrBtns.map((btn, i) => {
         return (
           <FeedbackButton

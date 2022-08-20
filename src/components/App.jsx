@@ -13,7 +13,8 @@ export class App extends React.Component {
   };
 
   addFeedback = e => {
-    Object.keys(this.state).map(el => {
+    const keys = Object.keys(this.state);
+    keys.forEach(el => {
       if (el === e.target.dataset.type) {
         this.setState(prevState => {
           return { [el]: prevState[el] + 1 };
@@ -38,26 +39,31 @@ export class App extends React.Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-    return (  
-      <Box width="100%" height="100vh" pt={7} backgroundColor="backgroundPrimary">
-      <Section title="Please leave feedback">
-        <FeedbackOptions
-          options={this.state}
-          onLeaveFeedback={this.addFeedback}
-        />
-
-        {this.countTotalFeedback() === 0 ? (
-          <Notifycation message="There is no feedback" />
-        ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
+    return (
+      <Box
+        width="100%"
+        height="100vh"
+        pt={7}
+        backgroundColor="backgroundPrimary"
+      >
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.addFeedback}
           />
-        )}
-      </Section>
+
+          {this.countTotalFeedback() === 0 ? (
+            <Notifycation message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
       </Box>
     );
   }
