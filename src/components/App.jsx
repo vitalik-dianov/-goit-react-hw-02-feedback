@@ -12,22 +12,17 @@ export class App extends React.Component {
     bad: 0,
   };
 
-  addFeedback = e => {
-    const keys = Object.keys(this.state);
-    keys.forEach(el => {
-      if (el === e.target.dataset.type) {
-        this.setState(prevState => {
-          return { [el]: prevState[el] + 1 };
-        });
-      }
+  addFeedback = feedback => {
+    this.setState(prevState => {
+      return { [feedback]: prevState[feedback] + 1 };
     });
   };
 
   countTotalFeedback = () => {
-    let total = 0;
-    for (const grade in this.state) {
-      total += this.state[grade];
-    }
+    const totalValues = Object.values(this.state);
+    const total = totalValues.reduce((acc, value) => {
+      return acc + value;
+    }, 0);
     return total;
   };
   countPositiveFeedbackPercentage = () => {
